@@ -24,6 +24,13 @@ class PaintApp:
         self.color_button = tk.Button(self.button_frame, text="Change Color", command=self.change_color)
         self.color_button.pack(side=tk.LEFT)
 
+        # brush size button, seperated cause its a bit longer
+        self.brush_size_label = tk.Label(self.button_frame, text="Brush Size")
+        self.brush_size_label.pack(side=tk.LEFT)
+        self.brush_size_scale = tk.Scale(self.button_frame, from_=1, to=20, orient="horizontal", command=self.set_brush_size)
+        self.brush_size_scale.set(self.brush_size)
+        self.brush_size_scale.pack(side=tk.LEFT)
+
         self.canvas.bind("<Button-1>", self.start_drawing)
         self.canvas.bind("<B1-Motion>", self.draw)
 
@@ -53,6 +60,8 @@ class PaintApp:
         if new_color:
             self.color = new_color
 
+    def set_brush_size(self, size):
+        self.brush_size = int(size)
 
 if __name__ == "__main__":
     root = tk.Tk()
